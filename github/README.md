@@ -18,7 +18,7 @@
 <br>
 
 <p align="center">
-  <img alt="dev.finances" src="src/assets/images/Macbook_Pro.png" width="100%">
+  <img alt="meTasks" src="src/assets/images/Macbook Pro.png" width="100%">
 </p>
 
 ## 🚀 Tecnologias
@@ -27,18 +27,18 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 - HTML
 - SASS
-- Firebase
-- ReactJS
-- TypeScript
-- Node.js
+* Firebase
+* ReactJS
+* TypeScript
+* Node.js
 
 ## 💻 Projeto
 
 This project is being developed with the goal to learn:
-- Firebase Authentication
-- Firebase Real Time DataBase
-- ReactJS
-- TypeScript
+* Firebase Authentication
+* Firebase Real Time DataBase
+* ReactJS
+* TypeScript
 I'm start to study these tecnologies in the last two weeks so i'm creating some applications to use this knologe and start this new walk.
 
 ## 🔖 Layout
@@ -48,6 +48,4 @@ Você pode visualizar o layout do projeto através [desse link](https://www.figm
 ---
 
 Feito com ♥ by Thiago Linch :wave: 
-<h1 align="left">
-  <img alt="meTask" title="JobsCalc" src="src/assets/images/meTask_Logo.png" width="100px" />
-</h1>
+# meTask
