@@ -1,0 +1,32 @@
+#lading-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12rem 0;
+
+  .login-content {
+    width: 352px;
+    height: 266px;
+    padding: 0 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+    background: #A4A4A4;
+
+    > img {
+      margin-bottom: 60px;
+    }
+
+    Button {
+      display: flex;
+      font: 400 16px 'Roboto', sans-serif;
+
+      img {
+        margin-right: 10px;
+      }
+    }
+  }
+}

@@ -1,0 +1,130 @@
+#home-page {
+  padding: 0 80px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .header {
+    width: 100%;
+    height: 155px;
+    margin-bottom: 33px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-radius: 0 0 10px 10px;
+    background: #A4A4A4;
+
+    img {
+      width: 119px;
+      margin-left: 62px;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      margin-right: 62px;
+
+      p{
+        font: 400 18px 'Poppins', sans-serif;
+        color: #F8F8F8;
+      }
+
+      > img {
+        width: 64px;
+        height: 64%;
+        border: 2px solid #FFC107;
+        border-radius: 9999px;
+        margin-left: 31px;
+      }
+    }
+  }
+
+  .card-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 176px;
+
+    .card {
+      width: 100%;
+      height: 172px;
+
+      display: flex;
+      align-items: center;
+      padding: 0px 20px;
+
+      background: #FEFEFE;
+      border-radius: 8px;
+
+      .checkBtn {
+        width: 75px;
+        height: 75px;
+        margin-left: 59px;
+        margin-right: 57px;
+        cursor: pointer;
+      }
+
+      .card-info {
+        width: 300px;
+        height: 100%;
+        padding: 40px 0;
+        margin-right: 244px;
+
+        strong {
+          font-family: 'Roboto';
+          font-size: 26px;
+          font-weight: 500;
+        }
+
+        p{
+          font: 400 15px 'Roboto', sans-serif;
+        }
+      }
+
+      .card-buttons {
+        display: flex;
+        align-items: center;
+        margin-right: 37px;
+        margin-top: 125px;
+
+        .editBtn {
+          cursor: pointer;
+        }
+
+        img {
+          margin-left: 8px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .plus-btn {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 63px;
+    height: 63px;
+    right: 80px;
+    bottom: 32px;
+
+    background: #FFC107;
+    border-radius: 100%;
+
+    cursor: pointer;
+
+    .new-task {
+      width: 30px;
+      height: 30px;
+
+      color: #F8F8F8;
+    }
+  }
+}
