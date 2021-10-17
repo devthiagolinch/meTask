@@ -7,9 +7,11 @@ import delteImg from "../assets/images/delete.svg";
 
 import '../styles/home.scss'
 import { useHistory } from 'react-router';
+import { useAuth } from '../hooks/useAuth';
 
 export function Home(){
   const history = useHistory();
+  const {user} = useAuth();
 
   function handleNewTask() {
     history.push('/new-task')
@@ -20,8 +22,8 @@ export function Home(){
       <div className="header">
         <img src={meTaskLogo} alt="Me Task Logo" />
         <div className="user-info">
-          <p>Thiago Linchin</p>
-          <img src="https://avatars.githubusercontent.com/u/79920937?v=4" alt="user avatar" />
+          <p>{user?.name}</p>
+          <img src={user?.avatar} alt="user avatar" />
         </div>
       </div>
 
