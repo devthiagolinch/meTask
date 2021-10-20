@@ -33,7 +33,7 @@
         color: #F8F8F8;
       }
 
-      > img {
+      .profile-image {
         width: 64px;
         height: 64%;
         border: 2px solid #FFC107;
@@ -52,7 +52,7 @@
     padding: 10px 176px;
 
     .card {
-      width: 100%;
+      width: 52rem;
       height: 172px;
 
       display: flex;
@@ -90,7 +90,6 @@
       .card-buttons {
         display: flex;
         align-items: center;
-        margin-right: 37px;
         margin-top: 125px;
 
         .editBtn {

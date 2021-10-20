@@ -1,21 +1,24 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPencilAlt, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 import meTaskLogo from "../assets/images/meTaskLogo.png";
-import checkImg from "../assets/images/check.svg";
-import delteImg from "../assets/images/delete.svg";
 
 import '../styles/home.scss'
+
 import { useHistory } from 'react-router';
 import { useAuth } from '../hooks/useAuth';
+import { useTask } from '../hooks/useTask';
+import { CardList } from '../components/CardList';
 
 export function Home(){
   const history = useHistory();
   const {user} = useAuth();
+  const {myTasks} = useTask();
 
   function handleNewTask() {
     history.push('/new-task')
   }
+
 
   return (
     <div id="home-page">
@@ -23,22 +26,21 @@ export function Home(){
         <img src={meTaskLogo} alt="Me Task Logo" />
         <div className="user-info">
           <p>{user?.name}</p>
-          <img src={user?.avatar} alt="user avatar" />
+          <img src={user?.avatar} alt="user avatar" className="profile-image" />
         </div>
       </div>
 
       <div className="card-list">
-        <div className="card">
-          <img src={checkImg} alt="Task Done" className="checkBtn" />
-          <div className="card-info">
-            <strong>Pagar Cartao de credito</strong>
-            <p>Nubank</p>
-          </div>
-          <div className="card-buttons">
-            <FontAwesomeIcon icon={faPencilAlt} color="#737380" className="editBtn" />
-            <img src={delteImg} alt="delete" />
-          </div>
-        </div>
+        {myTasks.map(task => {
+          return (
+            <CardList 
+              key={task.id}
+              title={task.title}
+              description={task.description}
+              authorId={task.author.id}
+            />
+          )
+        })}
       </div>
 
       <div className="plus-btn" onClick={handleNewTask}>

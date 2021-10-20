@@ -1,3 +1,6 @@
+import { useHistory } from "react-router";
+import { FormEvent, useState } from "react";
+
 import { Button } from "../components/Button";
 
 import meTaskLogo from '../assets/images/meTaskLogo.png'
@@ -5,13 +8,43 @@ import deleteImg from '../assets/images/delete.svg';
 import arrowImg from '../assets/images/arrow.svg';
 
 import '../styles/new-task.scss'
-import { useHistory } from "react-router";
+
+import { database } from "../services/firebase";
+import { useAuth } from '../hooks/useAuth';
 
 export function NewTask() {
   const history = useHistory();
+  const { user } = useAuth();
+  const [newTask, setNewTask] = useState('');
+  const [newTaskDescription, setNewTaskDescription] = useState('');
 
   function handleBackHome() {
     history.push('/home')
+  }
+  
+  async function handleCreateNewTask(event: FormEvent) {
+    event.preventDefault();
+
+    if(newTask.trim() === '') {
+      return;
+    }
+
+    const task = {
+      title: newTask,
+      description: newTaskDescription,
+      author: {
+        id: user?.id,
+        name: user?.name,
+        avatar: user?.avatar
+      }
+    }
+
+    await database.ref(`tasks/`).push(task);
+
+    setNewTask('');
+    setNewTaskDescription('');
+
+    history.push(`/home`)
   }
 
   return (
@@ -23,16 +56,27 @@ export function NewTask() {
       </div>
 
       <div className="main">
-        <div className="input-area">
-          <input type="text" placeholder="Nova Task" className="task-input" />
-          <input type="text" placeholder="Descreva a Task" className="task-description" />
-        </div>
+          <form className="input-area" onSubmit={handleCreateNewTask} >
+            <input type="text"
+            placeholder="Nova Task"
+            className="task-input" 
+            onChange={event => setNewTask(event.target.value)}
+            value={newTask} />
+
+            <input type="text"
+            placeholder="Descreva a Task"
+            className="task-description"
+            onChange={event => setNewTaskDescription(event.target.value)}
+            value={newTaskDescription}  />
+             <Button type="submit">Salvar</Button> 
+          </form>
+
         <div className="card">
           <p> Para adicionar uma nova Task
               Digite as informações ao lado
           </p>
           <div className="buttons">
-            <Button>Salvar</Button>
+           
             <img src={deleteImg} alt="" />
           </div>
         </div>
