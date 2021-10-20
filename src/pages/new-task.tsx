@@ -33,7 +33,7 @@ export function NewTask() {
       title: newTask,
       description: newTaskDescription,
       author: {
-        id: user?.id,
+        authorId: user?.id,
         name: user?.name,
         avatar: user?.avatar
       }

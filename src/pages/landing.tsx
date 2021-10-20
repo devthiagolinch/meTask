@@ -6,6 +6,7 @@ import { Button } from "../components/Button";
 import '../styles/landing.scss';
 import { useAuth } from "../hooks/useAuth";
 import { useHistory } from "react-router";
+import { useEffect } from "react";
 
 export function Landing(){
   const history = useHistory();
@@ -17,6 +18,16 @@ export function Landing(){
     }
     history.push('/home');
   }
+
+  // Depois do logout esta pagina sera regarregada para apagar os dados
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (user) {
+        window.location.reload();
+      }
+    }, 100);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <div id="lading-page">
