@@ -1,5 +1,5 @@
 import { useHistory } from "react-router";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 
 import { Button } from "../components/Button";
 
@@ -11,40 +11,58 @@ import '../styles/new-task.scss'
 
 import { database } from "../services/firebase";
 import { useAuth } from '../hooks/useAuth';
+import { useTask } from "../hooks/useTask";
 
-export function NewTask() {
+type TaskInfo = [
+  id: string,
+  title: string,
+  description: string,
+  authorId: string
+]
+
+type EditTaskProps = {
+  id: string,
+  title: string,
+  description: string,
+  authorId: string
+}
+
+export function EditTask(props: EditTaskProps) {
   const history = useHistory();
   const { user } = useAuth();
-  const [newTask, setNewTask] = useState('');
-  const [newTaskDescription, setNewTaskDescription] = useState('');
+
+  const [taskTitle, setTasktitle] = useState('');
+  const [taskDescription, setTaskDescription] = useState('');
+  const { myTasks } = useTask();
 
   function handleBackHome() {
     history.push('/home')
   }
+
   
-  async function handleCreateNewTask(event: FormEvent) {
+  
+  async function handleUpdateTask(event: FormEvent) {
     event.preventDefault();
 
-    if(newTask.trim() === '') {
+    if(taskTitle.trim() === '') {
       return;
     }
 
     const task = {
-      title: newTask,
-      description: newTaskDescription,
+      title: taskTitle,
+      description: taskDescription,
       author: {
+        authorId: user?.id,
         name: user?.name,
-        avatar: user?.avatar,
-        id: user?.id,
+        avatar: user?.avatar
       },
       createdAt: Date.now(),
-      authorId: user?.id,
     }
 
-    await database.ref(`tasks/`).push(task);
+    await database.ref(`tasks/${props.id}`).update(task);
 
-    setNewTask('');
-    setNewTaskDescription('');
+    setTasktitle('');
+    setTaskDescription('');
 
     history.push(`/home`)
   }
@@ -53,23 +71,23 @@ export function NewTask() {
     <div id="new-task-page">
       <div className="header">
         <img src={arrowImg} alt="voltar" className="arrowBack" onClick={handleBackHome} />
-        <p>Nova Task</p>
+        <p>Edit Task</p>
         <img src={meTaskLogo} alt="metask Logo" className="logo" />
       </div>
 
       <div className="main">
-          <form className="input-area" onSubmit={handleCreateNewTask} >
+          <form className="input-area" onSubmit={handleUpdateTask} >
             <input type="text"
-            placeholder="Nova Task"
+            placeholder='Task'
             className="task-input" 
-            onChange={event => setNewTask(event.target.value)}
-            value={newTask} />
+            onChange={event => setTasktitle(event.target.value)}
+            value={taskTitle} />
 
             <input type="text"
             placeholder="Descreva a Task"
             className="task-description"
-            onChange={event => setNewTaskDescription(event.target.value)}
-            value={newTaskDescription}  />
+            onChange={event => setTaskDescription(event.target.value)}
+            value={taskDescription}  />
              <Button type="submit">Salvar</Button> 
           </form>
 

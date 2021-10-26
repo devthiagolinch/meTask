@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { VscLayers } from "react-icons/vsc";
 
 import { database } from "../services/firebase";
 import { useAuth } from "./useAuth";
@@ -11,6 +12,8 @@ type FirebaseTasks = Record<string, {
   }
   title: string;
   description: string;
+  createdAt: number;
+  authorId: string;
 }>
 
 type MyTaskType = {
@@ -22,6 +25,7 @@ type MyTaskType = {
   }
   title: string;
   description: string;
+  createdAt: number;
 }
 
 export function useTask() {
@@ -41,7 +45,8 @@ export function useTask() {
           title: value.title,
           description: value.description,
           author: value.author,
-          authorId: value.author.id
+          authorId: value.authorId,
+          createdAt: value.createdAt
         }
       })
       

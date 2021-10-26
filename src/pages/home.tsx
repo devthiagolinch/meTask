@@ -41,16 +41,19 @@ export function Home(){
       </div>
 
       <div className="card-list">
-        {myTasks.map(task => {
-          return (
-            <CardList
-              key={task.id}
-              id={task.id}
-              title={task.title}
-              description={task.description}
-              authorId={task.author.id}
-            />
-          )
+        {myTasks.map((task) => {
+          if(task.author.id === user?.id) {
+            return (
+              <CardList
+                key={task.id}
+                id={task.id}
+                title={task.title}
+                description={task.description}
+                authorId={task.author.id}
+              />
+            )
+          }
+          
         })}
       </div>
 
