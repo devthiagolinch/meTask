@@ -17,12 +17,30 @@
     background: #FEFEFE;
     border-radius: 8px;
 
-    .checkBtn {
-      width: 75px;
-      height: 75px;
-      margin-left: 59px;
-      margin-right: 57px;
+    button {
+      border: 0;
+      background: transparent;
       cursor: pointer;
+      transition: filter 0.2s;
+      &.checkBtn {
+        width: 75px;
+        height: 75px;
+        margin-left: 59px;
+        margin-right: 57px;
+        cursor: pointer;
+
+        &.doned {
+          color: #FFC107;
+
+          svg circle {
+            stroke: #FFC107;
+          }
+
+          svg path {
+            stroke: #FFC107;
+          }
+        }
+      }
     }
 
     .card-info {

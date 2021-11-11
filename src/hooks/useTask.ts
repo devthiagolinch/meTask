@@ -1,19 +1,22 @@
 import { useEffect, useState } from "react";
-import { VscLayers } from "react-icons/vsc";
 
 import { database } from "../services/firebase";
 import { useAuth } from "./useAuth";
 
 type FirebaseTasks = Record<string, {
+  id: string;
   author: {
     name: string;
     avatar: string;
     id: string;
-  }
+  };
   title: string;
   description: string;
   createdAt: number;
   authorId: string;
+  done: Record<string, {
+    authorId: string;
+  }>;
 }>
 
 type MyTaskType = {
@@ -22,10 +25,12 @@ type MyTaskType = {
     id: string;
     name: string;
     avatar: string;
-  }
+  };
   title: string;
   description: string;
   createdAt: number;
+  authorId: string;
+  doneId: string | undefined;
 }
 
 export function useTask() {
@@ -33,7 +38,7 @@ export function useTask() {
   const [myTasks, setMyTasks] = useState<MyTaskType[]>([])
 
   useEffect(() => {
-    const taskRef = database.ref("tasks");
+    const taskRef = database.ref("tasks").orderByChild('createdAt');
 
     taskRef.on('value', task => {
       const databaseTasks = task.val();
@@ -46,7 +51,8 @@ export function useTask() {
           description: value.description,
           author: value.author,
           authorId: value.authorId,
-          createdAt: value.createdAt
+          createdAt: value.createdAt,
+          doneId: Object.entries(value.done ?? {}).find(([key, dones]) => dones.authorId === user?.id)?.[0]
         }
       })
       
